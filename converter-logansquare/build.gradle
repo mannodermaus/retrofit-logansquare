@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'net.ltgt.apt'
+
+dependencies {
+    compile "com.squareup.retrofit:retrofit:$RETROFIT_VERSION"
+    compile "com.bluelinelabs:logansquare:$LOGANSQUARE_VERSION"
+
+    testCompile "com.squareup.okhttp:mockwebserver:$MOCKWEBSERVER_VERSION"
+    testCompile "junit:junit:$JUNIT_VERSION"
+    testCompile "org.assertj:assertj-core:$ASSERTJ_VERSION"
+    testCompile "com.bluelinelabs:logansquare:$LOGANSQUARE_VERSION"
+    testApt "com.bluelinelabs:logansquare-compiler:$LOGANSQUARE_VERSION"
+}
