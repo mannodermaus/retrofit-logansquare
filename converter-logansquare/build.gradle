@@ -1,5 +1,8 @@
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'java'
 apply plugin: 'net.ltgt.apt'
+apply plugin: 'com.jfrog.bintray'
 
 dependencies {
     compile "com.squareup.retrofit:retrofit:$RETROFIT_VERSION"
@@ -10,4 +13,34 @@ dependencies {
     testCompile "org.assertj:assertj-core:$ASSERTJ_VERSION"
     testCompile "com.bluelinelabs:logansquare:$LOGANSQUARE_VERSION"
     testApt "com.bluelinelabs:logansquare-compiler:$LOGANSQUARE_VERSION"
+}
+
+Properties properties = new Properties()
+properties.load(new FileInputStream(new File("local.properties")))
+bintray {
+    user = properties.get("BINTRAY_USER")
+    key = properties.get("BINTRAY_API_KEY")
+    pkg {
+        repo = 'maven'
+        name = 'retrofit-logansquare'
+        userOrg = properties.get("BINTRAY_USER")
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/aurae/retrofit-logansquare'
+        version {
+            name = VERSION_NAME
+            desc = 'A Converter implementation using LoganSquare JSON serialization for Retrofit 2.'
+        }
+        publications = ['MyPublication']
+    }
+}
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId GROUP_ID
+            artifactId ARTIFACT_ID
+            version VERSION_NAME
+        }
+    }
 }

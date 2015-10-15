@@ -5,6 +5,7 @@ buildscript {
     }
     dependencies {
         classpath "net.ltgt.gradle:gradle-apt-plugin:$APT_PLUGIN_VERSION"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:$BINTRAY_PLUGIN_VERSION"
     }
 }
 
