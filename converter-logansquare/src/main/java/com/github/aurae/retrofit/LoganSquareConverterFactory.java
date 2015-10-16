@@ -20,6 +20,7 @@ import java.util.Map;
 public final class LoganSquareConverterFactory extends Converter.Factory {
     /**
      * Create an instance. Encoding to JSON and decoding from JSON will use UTF-8.
+     * @return A {@linkplain Converter.Factory} configured to serve LoganSquare converters
      */
     public static LoganSquareConverterFactory create() {
         return new LoganSquareConverterFactory();
