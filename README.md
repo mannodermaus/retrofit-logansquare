@@ -5,7 +5,11 @@ A `Converter` implementation using BlueLine Labs' [LoganSquare][logansquare] JSO
 
 ## Download
 
-Soon.
+Get it on `jcenter()`:
+
+```groovy
+compile "com.github.aurae.retrofit:converter-logansquare:1.0.0"
+```
 
 ## Usage
 
