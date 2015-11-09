@@ -8,7 +8,7 @@ A `Converter` implementation using BlueLine Labs' [LoganSquare][logansquare] JSO
 Get it on `jcenter()`:
 
 ```groovy
-compile "com.github.aurae.retrofit:converter-logansquare:1.0.0"
+compile "com.github.aurae.retrofit:converter-logansquare:1.1.0"
 ```
 
 ## Usage

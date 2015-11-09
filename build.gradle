@@ -9,8 +9,14 @@ buildscript {
     }
 }
 
+Properties properties = new Properties()
+properties.load(new FileInputStream(new File(rootProject.projectDir, "local.properties")))
 allprojects {
     repositories {
         jcenter()
+    }
+    ext {
+        bintrayUser = properties.get('BINTRAY_USER')
+        bintrayApiKey = properties.get('BINTRAY_API_KEY')
     }
 }

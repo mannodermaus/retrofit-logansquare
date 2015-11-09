@@ -20,11 +20,9 @@ dependencies {
 
 version = VERSION_NAME
 
-Properties properties = new Properties()
-properties.load(new FileInputStream(new File("local.properties")))
 bintray {
-    user = properties.get("BINTRAY_USER")
-    key = properties.get("BINTRAY_API_KEY")
+    user = project.ext.bintrayUser
+    key = project.ext.bintrayApiKey
     configurations = ['archives']
     pkg {
         repo = 'maven'
@@ -38,7 +36,6 @@ bintray {
             name = VERSION_NAME
             desc = 'A Converter implementation using LoganSquare JSON serialization for Retrofit 2.'
         }
-//        publications = ['MyPublication']
     }
 }
 
@@ -56,14 +53,3 @@ artifacts {
     archives sourcesJar
     archives javadocJar
 }
-//
-//publishing {
-//    publications {
-//        MyPublication(MavenPublication) {
-//            from components.java
-//            groupId GROUP_ID
-//            artifactId ARTIFACT_ID
-//            version VERSION_NAME
-//        }
-//    }
-//}
