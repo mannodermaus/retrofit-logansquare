@@ -139,12 +139,14 @@ public class LoganSquareConverterTest {
 
     @Test
     public void testListWrongType() throws IOException {
+        mockWebServer.enqueue(new MockResponse().setBody("{}"));
+
         // Setup the mock object with an incompatible type argument
         List<List<BasicModel>> body = new ArrayList<>();
 
         // Setup the API call and fire it
         try {
-            service.callListWrongType(body);
+            service.callListWrongType(body).execute();
             Assertions.failBecauseExceptionWasNotThrown(RuntimeException.class);
         } catch (RuntimeException ignored) {
         }
@@ -192,12 +194,14 @@ public class LoganSquareConverterTest {
 
     @Test
     public void testMapWrongKeyType() throws IOException {
+        mockWebServer.enqueue(new MockResponse().setBody("{}"));
+
         // Setup the mock object with an incompatible type argument
         Map<Integer, BasicModel> body = new HashMap<>();
 
         // Setup the API call and fire it
         try {
-            service.callMapWrongKey(body);
+            service.callMapWrongKey(body).execute();
             Assertions.failBecauseExceptionWasNotThrown(RuntimeException.class);
         } catch (RuntimeException ignored) {
         }
@@ -205,12 +209,14 @@ public class LoganSquareConverterTest {
 
     @Test
     public void testMapWrongValueType() throws IOException {
+        mockWebServer.enqueue(new MockResponse().setBody("{}"));
+
         // Setup the mock object with an incompatible type argument
         Map<String, List<BasicModel>> body = new HashMap<>();
 
         // Setup the API call and fire it
         try {
-            service.callMapWrongValue(body);
+            service.callMapWrongValue(body).execute();
             Assertions.failBecauseExceptionWasNotThrown(RuntimeException.class);
         } catch (RuntimeException ignored) {
         }
@@ -218,12 +224,14 @@ public class LoganSquareConverterTest {
 
     @Test
     public void testArray() throws IOException {
+        mockWebServer.enqueue(new MockResponse().setBody("{}"));
+
         // Setup the mock object with an incompatible type argument
         BasicModel[] body = new BasicModel[0];
 
         // Setup the API call and fire it
         try {
-            service.callArray(body);
+            service.callArray(body).execute();
             Assertions.failBecauseExceptionWasNotThrown(RuntimeException.class);
         } catch (RuntimeException ignored) {
         }
