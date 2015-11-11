@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
 
 final class LoganSquareResponseBodyConverter implements Converter<ResponseBody, Object> {
@@ -31,7 +32,8 @@ final class LoganSquareResponseBodyConverter implements Converter<ResponseBody, 
             Type firstType = typeArguments[0];
 
             // Check for Map arguments
-            if (parameterizedType.getRawType() == Map.class) {
+            Type rawType = parameterizedType.getRawType();
+            if (rawType == Map.class) {
                 Type secondType = typeArguments[1];
 
                 // Perform validity checks on the type arguments, since LoganSquare works only on String keys
@@ -40,9 +42,15 @@ final class LoganSquareResponseBodyConverter implements Converter<ResponseBody, 
                     return LoganSquare.parseMap(is, (Class<?>) secondType);
                 }
 
-            } else if (firstType instanceof Class) {
-                // List conversion
-                return LoganSquare.parseList(is, (Class<?>) firstType);
+            } else if (rawType == List.class) {
+                if (firstType instanceof Class) {
+                    // List conversion
+                    return LoganSquare.parseList(is, (Class<?>) firstType);
+                }
+            } else {
+                // TODO Parametrized types
+                // ...
+                return null;
             }
         }
         return null;
