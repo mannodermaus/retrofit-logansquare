@@ -201,7 +201,7 @@ public class LoganSquareConverterTest {
 
         // Setup the API call and fire it
         try {
-            service.callMapWrongKey(body).execute();
+            Response<Map<Integer, BasicModel>> response = service.callMapWrongKey(body).execute();
             Assertions.failBecauseExceptionWasNotThrown(RuntimeException.class);
         } catch (RuntimeException ignored) {
         }
