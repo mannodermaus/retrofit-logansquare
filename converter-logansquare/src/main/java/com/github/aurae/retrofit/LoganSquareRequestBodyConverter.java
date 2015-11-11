@@ -7,7 +7,7 @@ import retrofit.Converter;
 
 import java.io.IOException;
 
-public class LoganSquareRequestBodyConverter implements Converter<Object, RequestBody> {
+final class LoganSquareRequestBodyConverter implements Converter<Object, RequestBody> {
 
     private static final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
 
