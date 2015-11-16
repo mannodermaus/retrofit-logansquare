@@ -48,9 +48,9 @@ final class LoganSquareResponseBodyConverter implements Converter<ResponseBody, 
                     return LoganSquare.parseList(is, (Class<?>) firstType);
                 }
             } else {
-                // TODO Parametrized types
-                // ...
-                return null;
+                // Look up a GenericsMapper for this type and use that
+                GenericsMapper mapper = LoganSquareConverterUtils.genericsMapperFor(parameterizedType);
+                return mapper.parse(is);
             }
         }
         return null;

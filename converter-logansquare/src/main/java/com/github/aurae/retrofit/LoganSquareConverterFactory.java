@@ -32,6 +32,6 @@ public final class LoganSquareConverterFactory extends Converter.Factory {
 
     @Override
     public Converter<?, RequestBody> toRequestBody(Type type, Annotation[] annotations) {
-        return new LoganSquareRequestBodyConverter();
+        return new LoganSquareRequestBodyConverter(type);
     }
 }
