@@ -11,7 +11,7 @@ Get it on `jcenter()`:
 compile "com.github.aurae.retrofit:converter-logansquare:1.1.0"
 ```
 
-Don't forget to include LoganSquare's dependencies as well. Check [their repo](logansquare) for the latest version:
+Don't forget to include LoganSquare's dependencies as well. Check [their repo][logansquare] for the latest version:
 
 ```groovy
 apt "com.bluelinelabs:logansquare-compiler:<latest-logansquare-version>"
