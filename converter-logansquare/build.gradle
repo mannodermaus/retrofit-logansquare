@@ -8,10 +8,10 @@ sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
 dependencies {
-    compile "com.squareup.retrofit:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
     compile "com.bluelinelabs:logansquare:$LOGANSQUARE_VERSION"
 
-    testCompile "com.squareup.okhttp:mockwebserver:$MOCKWEBSERVER_VERSION"
+    testCompile "com.squareup.okhttp3:mockwebserver:$MOCKWEBSERVER_VERSION"
     testCompile "junit:junit:$JUNIT_VERSION"
     testCompile "org.assertj:assertj-core:$ASSERTJ_VERSION"
     testCompile "com.bluelinelabs:logansquare:$LOGANSQUARE_VERSION"

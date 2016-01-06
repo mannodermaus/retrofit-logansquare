@@ -1,11 +1,12 @@
 package com.github.aurae.retrofit;
 
 import com.bluelinelabs.logansquare.JsonMapper;
-import com.squareup.okhttp.ResponseBody;
-import retrofit.Converter;
 
 import java.io.IOException;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Converter;
 
 final class LSResponseBodyListConverter<T> implements Converter<ResponseBody, List<T>> {
 

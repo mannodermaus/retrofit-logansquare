@@ -2,15 +2,16 @@ package com.github.aurae.retrofit;
 
 import com.bluelinelabs.logansquare.JsonMapper;
 import com.bluelinelabs.logansquare.LoganSquare;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.ResponseBody;
-import retrofit.Converter;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Converter;
+import retrofit2.Retrofit;
 
 /**
  * A {@linkplain Converter.Factory converter} which uses LoganSquare for JSON.
@@ -34,7 +35,7 @@ public final class LoganSquareConverterFactory extends Converter.Factory {
     }
 
     @Override
-    public Converter<ResponseBody, ?> fromResponseBody(Type type, Annotation[] annotations) {
+    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         if (type instanceof Class) {
             // Return a plain Object converter
             return new LSResponseBodyObjectConverter<>(mapperFor(type));
@@ -66,7 +67,7 @@ public final class LoganSquareConverterFactory extends Converter.Factory {
     }
 
     @Override
-    public Converter<?, RequestBody> toRequestBody(Type type, Annotation[] annotations) {
+    public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         if (type instanceof Class) {
             // Return a plain Object converter
             return new LSRequestBodyObjectConverter<>(mapperFor(type));
