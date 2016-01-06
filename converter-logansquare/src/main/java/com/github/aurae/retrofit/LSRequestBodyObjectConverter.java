@@ -1,10 +1,11 @@
 package com.github.aurae.retrofit;
 
 import com.bluelinelabs.logansquare.JsonMapper;
-import com.squareup.okhttp.RequestBody;
-import retrofit.Converter;
 
 import java.io.IOException;
+
+import okhttp3.RequestBody;
+import retrofit2.Converter;
 
 import static com.github.aurae.retrofit.LSConverterUtils.MEDIA_TYPE;
 
