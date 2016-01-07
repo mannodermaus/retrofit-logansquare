@@ -1,9 +1,9 @@
 package com.github.aurae.retrofit;
 
 import com.bluelinelabs.logansquare.LoganSquare;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.RequestBody;
-import retrofit.Converter;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import retrofit2.Converter;
 
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;

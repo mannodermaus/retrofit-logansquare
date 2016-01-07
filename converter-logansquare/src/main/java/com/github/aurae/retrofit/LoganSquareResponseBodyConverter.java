@@ -1,8 +1,8 @@
 package com.github.aurae.retrofit;
 
 import com.bluelinelabs.logansquare.LoganSquare;
-import com.squareup.okhttp.ResponseBody;
-import retrofit.Converter;
+import okhttp3.ResponseBody;
+import retrofit2.Converter;
 
 import java.io.IOException;
 import java.io.InputStream;

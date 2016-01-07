@@ -1,8 +1,9 @@
 package com.github.aurae.retrofit;
 
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.ResponseBody;
-import retrofit.Converter;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Converter;
+import retrofit2.Retrofit;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -26,12 +27,12 @@ public final class LoganSquareConverterFactory extends Converter.Factory {
     }
 
     @Override
-    public Converter<ResponseBody, ?> fromResponseBody(Type type, Annotation[] annotations) {
+    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         return new LoganSquareResponseBodyConverter(type);
     }
 
     @Override
-    public Converter<?, RequestBody> toRequestBody(Type type, Annotation[] annotations) {
+    public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         return new LoganSquareRequestBodyConverter(type);
     }
 }
