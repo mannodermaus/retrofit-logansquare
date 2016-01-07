@@ -1,10 +1,7 @@
 package com.github.aurae.retrofit;
 
-import com.bluelinelabs.logansquare.LoganSquare;
-import com.bluelinelabs.logansquare.ParameterizedType;
 import com.github.aurae.retrofit.model.BasicModel;
 import com.github.aurae.retrofit.model.CustomEnum;
-import com.github.aurae.retrofit.model.GenericModel;
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
 import com.squareup.okhttp.mockwebserver.RecordedRequest;
@@ -19,7 +16,6 @@ import retrofit.http.Body;
 import retrofit.http.POST;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,22 +33,13 @@ public class LoganSquareConverterTest {
         Call<List<BasicModel>> callList(@Body List<BasicModel> body);
 
         @POST("/")
-        Call<BasicModel> callListWrongType(@Body List<List<BasicModel>> body);
-
-        @POST("/")
         Call<Map<String, BasicModel>> callMap(@Body Map<String, BasicModel> body);
 
         @POST("/")
         Call<Map<Integer, BasicModel>> callMapWrongKey(@Body Map<Integer, BasicModel> body);
 
         @POST("/")
-        Call<Map<String, List<BasicModel>>> callMapWrongValue(@Body Map<String, List<BasicModel>> body);
-
-        @POST("/")
         Call<BasicModel[]> callArray(@Body BasicModel[] body);
-
-        @POST("/")
-        Call<GenericModel<String>> callGeneric(@Body GenericModel<String> body);
     }
 
     @Rule
@@ -142,21 +129,6 @@ public class LoganSquareConverterTest {
     }
 
     @Test
-    public void testListWrongType() throws IOException {
-        mockWebServer.enqueue(new MockResponse().setBody("{}"));
-
-        // Setup the mock object with an incompatible type argument
-        List<List<BasicModel>> body = new ArrayList<>();
-
-        // Setup the API call and fire it
-        try {
-            service.callListWrongType(body).execute();
-            Assertions.failBecauseExceptionWasNotThrown(RuntimeException.class);
-        } catch (RuntimeException ignored) {
-        }
-    }
-
-    @Test
     public void testMap() throws IOException, InterruptedException {
         // Enqueue a mock response
         mockWebServer.enqueue(new MockResponse().setBody("{\"item1\":{\"customType\":2,\"name\":\"LOGAN SQUARE IS COOL\",\"list\":[\"value1\",\"value2\"]},\"item2\":{\"customType\":1,\"name\":\"LOGAN SQUARE IS COOL2\",\"list\":[\"value1\",\"value2\"]}}"));
@@ -202,25 +174,11 @@ public class LoganSquareConverterTest {
 
         // Setup the mock object with an incompatible type argument
         Map<Integer, BasicModel> body = new HashMap<>();
+        body.put(1, new BasicModel("name", "not", CustomEnum.VAL_1, null));
 
         // Setup the API call and fire it
         try {
-            Response<Map<Integer, BasicModel>> response = service.callMapWrongKey(body).execute();
-            Assertions.failBecauseExceptionWasNotThrown(RuntimeException.class);
-        } catch (RuntimeException ignored) {
-        }
-    }
-
-    @Test
-    public void testMapWrongValueType() throws IOException {
-        mockWebServer.enqueue(new MockResponse().setBody("{}"));
-
-        // Setup the mock object with an incompatible type argument
-        Map<String, List<BasicModel>> body = new HashMap<>();
-
-        // Setup the API call and fire it
-        try {
-            service.callMapWrongValue(body).execute();
+            service.callMapWrongKey(body).execute();
             Assertions.failBecauseExceptionWasNotThrown(RuntimeException.class);
         } catch (RuntimeException ignored) {
         }
@@ -231,7 +189,7 @@ public class LoganSquareConverterTest {
         mockWebServer.enqueue(new MockResponse().setBody("{}"));
 
         // Setup the mock object with an incompatible type argument
-        BasicModel[] body = new BasicModel[0];
+        BasicModel[] body = new BasicModel[] { new BasicModel("name", "not", CustomEnum.VAL_2, null)};
 
         // Setup the API call and fire it
         try {
@@ -239,46 +197,5 @@ public class LoganSquareConverterTest {
             Assertions.failBecauseExceptionWasNotThrown(RuntimeException.class);
         } catch (RuntimeException ignored) {
         }
-    }
-
-    @Test
-    public void testGenerics() throws IOException, InterruptedException {
-        mockWebServer.enqueue(new MockResponse().setBody("{\"name\":\"The Name\",\"content\":\"String Content\"}"));
-
-        // TODO Create an annotation processor out of this stuff
-        LoganSquareConverterUtils.GENERIC_MAPPERS.put(Arrays.toString(new Class[] { GenericModel.class, String.class }), new GenericsMapper<GenericModel<String>>() {
-
-            private final ParameterizedType<GenericModel<String>> type = new ParameterizedType<GenericModel<String>>() {
-            };
-
-            @Override
-            public String serialize(GenericModel<String> value) throws IOException {
-                return LoganSquare.serialize(value, type);
-            }
-
-            @Override
-            public GenericModel<String> parse(InputStream json) throws IOException {
-                return LoganSquare.parse(json, type);
-            }
-        });
-
-        // Setup the mock object
-        GenericModel<String> body = new GenericModel<>();
-        body.getClass();
-        body.name = "The Name";
-        body.content = "String Content";
-
-        Response<GenericModel<String>> response = service.callGeneric(body).execute();
-        GenericModel<String> responseBody = response.body();
-
-        // Assert that conversions worked
-        assertThat(responseBody).isNotNull();
-        assertThat(responseBody.name).isEqualTo(body.name);
-        assertThat(responseBody.content).isOfAnyClassIn(String.class);
-        assertThat(responseBody.content).isEqualTo(body.content);
-
-        // Check request body and the received header
-        RecordedRequest request = mockWebServer.takeRequest();
-        assertThat(request.getHeader("Content-Type")).isEqualTo("application/json; charset=UTF-8");
     }
 }

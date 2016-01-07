@@ -28,9 +28,7 @@ final class LoganSquareRequestBodyConverter implements Converter<Object, Request
             ParameterizedType parameterizedType = (ParameterizedType) type;
             Type rawType = parameterizedType.getRawType();
             if (rawType != List.class && rawType != Map.class) {
-                // Look up a GenericsMapper for this type and use that
-                GenericsMapper mapper = LoganSquareConverterUtils.genericsMapperFor(parameterizedType);
-                return RequestBody.create(MEDIA_TYPE, mapper.serialize(value));
+                // TODO Generics
             }
         }
 
