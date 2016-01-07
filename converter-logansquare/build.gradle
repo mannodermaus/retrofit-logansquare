@@ -34,7 +34,7 @@ bintray {
         vcsUrl = 'https://github.com/aurae/retrofit-logansquare'
         version {
             name = VERSION_NAME
-            desc = 'A Converter implementation using LoganSquare JSON serialization for Retrofit 2.'
+            desc = DESCRIPTION
         }
     }
 }

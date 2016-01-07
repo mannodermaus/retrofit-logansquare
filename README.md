@@ -5,11 +5,12 @@ A `Converter` implementation using BlueLine Labs' [LoganSquare][logansquare] JSO
 
 ## Download
 
-Get it on `jcenter()`:
+Get the appropriate version on `jcenter()`:
 
-```groovy
-compile "com.github.aurae.retrofit:converter-logansquare:1.1.0"
-```
+|Your Retrofit version|Converter artifact|
+|---|---|
+|`2.0.0-beta2`|`compile "com.github.aurae.retrofit:converter-logansquare:1.1.0"`|
+|`2.0.0-beta3`|`compile "com.github.aurae.retrofit:converter-logansquare:1.2.0"`|
 
 Don't forget to include LoganSquare's dependencies as well. Check [their repo][logansquare] for the latest version:
 
