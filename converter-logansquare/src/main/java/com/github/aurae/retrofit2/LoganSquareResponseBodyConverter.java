@@ -1,4 +1,4 @@
-package com.github.aurae.retrofit;
+package com.github.aurae.retrofit2;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 import okhttp3.ResponseBody;

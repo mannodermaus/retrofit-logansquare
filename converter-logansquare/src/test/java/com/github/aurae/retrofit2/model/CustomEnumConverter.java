@@ -1,4 +1,4 @@
-package com.github.aurae.retrofit.model;
+package com.github.aurae.retrofit2.model;
 
 import com.bluelinelabs.logansquare.typeconverters.TypeConverter;
 import com.fasterxml.jackson.core.JsonGenerator;

@@ -1,7 +1,7 @@
-package com.github.aurae.retrofit;
+package com.github.aurae.retrofit2;
 
-import com.github.aurae.retrofit.model.BasicModel;
-import com.github.aurae.retrofit.model.CustomEnum;
+import com.github.aurae.retrofit2.model.BasicModel;
+import com.github.aurae.retrofit2.model.CustomEnum;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
