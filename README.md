@@ -37,7 +37,7 @@ In that case, it might be time to upgrade! If you can't or won't, refer to [this
 
 ## License
 
-	Copyright 2015 Marcel Schnelle
+	Copyright 2016 Marcel Schnelle
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
