@@ -21,36 +21,42 @@ final class LoganSquareResponseBodyConverter implements Converter<ResponseBody, 
 
     @Override
     public Object convert(ResponseBody value) throws IOException {
-        InputStream is = value.byteStream();
-        if (type instanceof Class) {
-            // Plain object conversion
-            return LoganSquare.parse(is, (Class<?>) type);
+        try {
+            InputStream is = value.byteStream();
+            if (type instanceof Class) {
+                // Plain object conversion
+                return LoganSquare.parse(is, (Class<?>) type);
 
-        } else if (type instanceof ParameterizedType) {
-            ParameterizedType parameterizedType = (ParameterizedType) type;
-            Type[] typeArguments = parameterizedType.getActualTypeArguments();
-            Type firstType = typeArguments[0];
+            } else if (type instanceof ParameterizedType) {
+                ParameterizedType parameterizedType = (ParameterizedType) type;
+                Type[] typeArguments = parameterizedType.getActualTypeArguments();
+                Type firstType = typeArguments[0];
 
-            // Check for Map arguments
-            Type rawType = parameterizedType.getRawType();
-            if (rawType == Map.class) {
-                Type secondType = typeArguments[1];
+                // Check for Map arguments
+                Type rawType = parameterizedType.getRawType();
+                if (rawType == Map.class) {
+                    Type secondType = typeArguments[1];
 
-                // Perform validity checks on the type arguments, since LoganSquare works only on String keys
-                if (firstType == String.class && secondType instanceof Class) {
-                    // Map conversion
-                    return LoganSquare.parseMap(is, (Class<?>) secondType);
+                    // Perform validity checks on the type arguments, since LoganSquare works only on String keys
+                    if (firstType == String.class && secondType instanceof Class) {
+                        // Map conversion
+                        return LoganSquare.parseMap(is, (Class<?>) secondType);
+                    }
+
+                } else if (rawType == List.class) {
+                    if (firstType instanceof Class) {
+                        // List conversion
+                        return LoganSquare.parseList(is, (Class<?>) firstType);
+                    }
+                } else {
+                    // TODO Generics
                 }
-
-            } else if (rawType == List.class) {
-                if (firstType instanceof Class) {
-                    // List conversion
-                    return LoganSquare.parseList(is, (Class<?>) firstType);
-                }
-            } else {
-                // TODO Generics
             }
+            return null;
+
+        } finally {
+            // Close the response body after being done with it
+            value.close();
         }
-        return null;
     }
 }
