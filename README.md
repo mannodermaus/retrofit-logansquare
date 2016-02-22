@@ -11,6 +11,7 @@ Get the appropriate version for your Retrofit dependency on `jcenter()`:
 |---|---|
 |`2.0.0-beta2`|`compile "com.github.aurae.retrofit:converter-logansquare:1.1.0"`|
 |`2.0.0-beta3`|`compile "com.github.aurae.retrofit2:converter-logansquare:1.2.1"`|
+|`2.0.0-beta4`|`compile "com.github.aurae.retrofit2:converter-logansquare:1.3.0"`|
 
 Don't forget to include LoganSquare's dependencies as well. Check [their repo][logansquare] for the latest version:
 
