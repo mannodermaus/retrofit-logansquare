@@ -28,11 +28,23 @@ public final class LoganSquareConverterFactory extends Converter.Factory {
 
     @Override
     public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
+        if (!(type instanceof Class)) {
+            return null;
+        }
+        if (!LoganSquare.supports((Class) type)) {
+            return null;
+        }
         return new LoganSquareResponseBodyConverter(type);
     }
 
     @Override
     public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
+        if (!(type instanceof Class)) {
+            return null;
+        }
+        if (!LoganSquare.supports((Class) type)) {
+            return null;
+        }
         return new LoganSquareRequestBodyConverter(type);
     }
 }
