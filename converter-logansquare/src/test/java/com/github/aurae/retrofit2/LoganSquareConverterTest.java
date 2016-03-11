@@ -2,6 +2,7 @@ package com.github.aurae.retrofit2;
 
 import com.github.aurae.retrofit2.model.BasicModel;
 import com.github.aurae.retrofit2.model.CustomEnum;
+import com.github.aurae.retrofit2.model.ForeignModel;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -40,6 +41,24 @@ public class LoganSquareConverterTest {
 
         @POST("/")
         Call<BasicModel[]> callArray(@Body BasicModel[] body);
+
+        @POST("/")
+        Call<BasicModel> callObjectRequestNotSupported(@Body ForeignModel body);
+
+        @POST("/")
+        Call<ForeignModel> callObjectResponseNotSupported(@Body BasicModel body);
+
+        @POST("/")
+        Call<BasicModel> callListRequestNotSupported(@Body List<ForeignModel> body);
+
+        @POST("/")
+        Call<List<ForeignModel>> callListResponseNotSupported(@Body BasicModel body);
+
+        @POST("/")
+        Call<BasicModel> callMapRequestNotSupported(@Body Map<String, ForeignModel> body);
+
+        @POST("/")
+        Call<Map<String, ForeignModel>> callMapResponseNotSupported(@Body BasicModel body);
     }
 
     @Rule
@@ -54,6 +73,80 @@ public class LoganSquareConverterTest {
                 .addConverterFactory(LoganSquareConverterFactory.create())
                 .build()
                 .create(Service.class);
+    }
+
+    @Test
+    public void testDoesntSupportObjectRequest() throws IOException, InterruptedException {
+        ForeignModel requestBody = new ForeignModel();
+
+        try {
+            // Call the API and execute it
+            service.callObjectRequestNotSupported(requestBody).execute();
+            Assertions.failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    @Test
+    public void testDoesntSupportObjectResponse() throws IOException, InterruptedException {
+        BasicModel requestBody = new BasicModel();
+
+        try {
+            // Call the API and execute it
+            service.callObjectResponseNotSupported(requestBody).execute();
+            Assertions.failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    @Test
+    public void testDoesntSupportListRequest() throws IOException, InterruptedException {
+        List<ForeignModel> requestBody = new ArrayList<>();
+        requestBody.add(new ForeignModel());
+
+        try {
+            // Call the API and execute it
+            service.callListRequestNotSupported(requestBody).execute();
+            Assertions.failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    @Test
+    public void testDoesntSupportListResponse() throws IOException, InterruptedException {
+        BasicModel requestBody = new BasicModel();
+
+        try {
+            // Call the API and execute it
+            service.callListResponseNotSupported(requestBody).execute();
+            Assertions.failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    @Test
+    public void testDoesntSupportMapRequest() throws IOException, InterruptedException {
+        Map<String, ForeignModel> requestBody = new HashMap<>();
+        requestBody.put("obj", new ForeignModel());
+
+        try {
+            // Call the API and execute it
+            service.callMapRequestNotSupported(requestBody).execute();
+            Assertions.failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
+        } catch (IllegalArgumentException ignored) {
+        }
+    }
+
+    @Test
+    public void testDoesntSupportMapResponse() throws IOException, InterruptedException {
+        BasicModel requestBody = new BasicModel();
+
+        try {
+            // Call the API and execute it
+            service.callMapResponseNotSupported(requestBody).execute();
+            Assertions.failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
+        } catch (IllegalArgumentException ignored) {
+        }
     }
 
     @Test

@@ -35,19 +35,11 @@ final class LoganSquareResponseBodyConverter implements Converter<ResponseBody, 
                 // Check for Map arguments
                 Type rawType = parameterizedType.getRawType();
                 if (rawType == Map.class) {
-                    Type secondType = typeArguments[1];
-
-                    // Perform validity checks on the type arguments, since LoganSquare works only on String keys
-                    if (firstType == String.class && secondType instanceof Class) {
-                        // Map conversion
-                        return LoganSquare.parseMap(is, (Class<?>) secondType);
-                    }
+                    return LoganSquare.parseMap(is, (Class<?>) typeArguments[1]);
 
                 } else if (rawType == List.class) {
-                    if (firstType instanceof Class) {
-                        // List conversion
-                        return LoganSquare.parseList(is, (Class<?>) firstType);
-                    }
+                    return LoganSquare.parseList(is, (Class<?>) firstType);
+
                 } else {
                     // TODO Generics
                 }
