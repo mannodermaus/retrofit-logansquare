@@ -11,6 +11,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
+import static com.bluelinelabs.logansquare.ConverterUtils.parameterizedTypeOf;
+
 final class LoganSquareResponseBodyConverter implements Converter<ResponseBody, Object> {
 
     private final Type type;
@@ -32,7 +34,6 @@ final class LoganSquareResponseBodyConverter implements Converter<ResponseBody, 
                 Type[] typeArguments = parameterizedType.getActualTypeArguments();
                 Type firstType = typeArguments[0];
 
-                // Check for Map arguments
                 Type rawType = parameterizedType.getRawType();
                 if (rawType == Map.class) {
                     return LoganSquare.parseMap(is, (Class<?>) typeArguments[1]);
@@ -41,7 +42,8 @@ final class LoganSquareResponseBodyConverter implements Converter<ResponseBody, 
                     return LoganSquare.parseList(is, (Class<?>) firstType);
 
                 } else {
-                    // TODO Generics
+                    // Generics
+                    return LoganSquare.parse(is, parameterizedTypeOf(type));
                 }
             }
             return null;

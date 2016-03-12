@@ -3,6 +3,7 @@ package com.github.aurae.retrofit2;
 import com.github.aurae.retrofit2.model.BasicModel;
 import com.github.aurae.retrofit2.model.CustomEnum;
 import com.github.aurae.retrofit2.model.ForeignModel;
+import com.github.aurae.retrofit2.model.GenericModel;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -41,6 +42,9 @@ public class LoganSquareConverterTest {
 
         @POST("/")
         Call<BasicModel[]> callArray(@Body BasicModel[] body);
+
+        @POST("/")
+        Call<GenericModel<Integer>> callGenerics(@Body GenericModel<Integer> body);
 
         @POST("/")
         Call<BasicModel> callObjectRequestNotSupported(@Body ForeignModel body);
@@ -179,6 +183,24 @@ public class LoganSquareConverterTest {
         RecordedRequest request = mockWebServer.takeRequest();
         assertThat(request.getBody().readUtf8()).isEqualTo("{\"customType\":2,\"name\":\"LOGAN SQUARE IS COOL\",\"list\":[\"value1\",\"value2\"]}");
         assertThat(request.getHeader("Content-Type")).isEqualTo("application/json; charset=UTF-8");
+    }
+
+    @Test
+    public void testGenerics() throws IOException, InterruptedException {
+        // Enqueue a mock response
+        mockWebServer.enqueue(new MockResponse().setBody("{\"name\":\"Object\",\"value\":123}"));
+
+        // Setup the mock object
+        GenericModel<Integer> body = new GenericModel<>("Object", 123);
+
+        // Call the API and execute it
+        Call<GenericModel<Integer>> call = service.callGenerics(body);
+        Response<GenericModel<Integer>> response = call.execute();
+        GenericModel<Integer> responseBody = response.body();
+
+        // Assert that conversions worked
+        assertThat(responseBody.getName()).isEqualTo("Object");
+        assertThat(responseBody.getValue()).isEqualTo(123);
     }
 
     @Test
