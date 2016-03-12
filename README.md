@@ -1,17 +1,13 @@
 # retrofit-logansquare
 
 A `Converter` implementation using BlueLine Labs' [LoganSquare][logansquare] JSON serialization for Square's [Retrofit][retrofit] REST library.  
-**Please note** that this library is solely intended for usage with **version 2 of Retrofit** (*2.0.0-beta2* and up)! It won't work with 1.9 or earlier. Please refer [to this section of the README](#retro1) for instructions on how to include LoganSquare serialization on these versions.
+**Please note** that this library is solely intended for usage with **Retrofit 2.0.0 and above**! It won't work with 1.9 or earlier. Please refer [to this section of the README](#retro1) for instructions on how to include LoganSquare serialization on these versions.
 
 ## Download
 
-Get the appropriate version for your Retrofit dependency on `jcenter()`:
+Get it on `jcenter()`:
 
-|Your Retrofit version|Converter artifact|
-|---|---|
-|`2.0.0-beta2`|`compile "com.github.aurae.retrofit:converter-logansquare:1.1.0"`|
-|`2.0.0-beta3`|`compile "com.github.aurae.retrofit2:converter-logansquare:1.2.1"`|
-|`2.0.0-beta4`|`compile "com.github.aurae.retrofit2:converter-logansquare:1.3.0"`|
+`compile "com.github.aurae.retrofit2:converter-logansquare:1.4.0"`
 
 Don't forget to include LoganSquare's dependencies as well. Check [their repo][logansquare] for the latest version:
 
