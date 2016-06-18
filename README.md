@@ -7,7 +7,7 @@ A `Converter` implementation using BlueLine Labs' [LoganSquare][logansquare] JSO
 
 Get it on `jcenter()`:
 
-`compile "com.github.aurae.retrofit2:converter-logansquare:1.4.0"`
+`compile "com.github.aurae.retrofit2:converter-logansquare:1.4.1"`
 
 Don't forget to include LoganSquare's dependencies as well. Check [their repo][logansquare] for the latest version:
 
