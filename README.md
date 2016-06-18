@@ -9,7 +9,7 @@ Get it on `jcenter()`:
 
 `compile "com.github.aurae.retrofit2:converter-logansquare:1.4.1"`
 
-Don't forget to include LoganSquare's dependencies as well. Check [their repo][logansquare] for the latest version:
+Don't forget to include LoganSquare's dependencies as well! It seems they are on [![this version](https://img.shields.io/github/tag/bluelinelabs/LoganSquare.svg)][logansquare] at the moment.
 
 ```groovy
 apt "com.bluelinelabs:logansquare-compiler:<latest-logansquare-version>"
