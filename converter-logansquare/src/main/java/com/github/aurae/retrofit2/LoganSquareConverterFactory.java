@@ -14,7 +14,7 @@ import static com.bluelinelabs.logansquare.ConverterUtils.isSupported;
 /**
  * A {@linkplain Converter.Factory converter} which uses LoganSquare for JSON.
  *
- * @see <a>https://github.com/bluelinelabs/LoganSquare</a>
+ * @see <a href="https://github.com/bluelinelabs/LoganSquare">https://github.com/bluelinelabs/LoganSquare</a>
  */
 public final class LoganSquareConverterFactory extends Converter.Factory {
     /**

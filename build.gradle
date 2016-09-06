@@ -10,7 +10,11 @@ buildscript {
 }
 
 Properties properties = new Properties()
-properties.load(new FileInputStream(new File(rootProject.projectDir, "local.properties")))
+def propertiesFile = new File(rootProject.projectDir, "local.properties")
+if (propertiesFile.exists()) {
+    properties.load(new FileInputStream(propertiesFile))
+}
+
 allprojects {
     repositories {
         jcenter()
