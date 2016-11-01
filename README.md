@@ -14,7 +14,7 @@ Their latest release at the moment:
 [![Check the repo](https://img.shields.io/github/tag/bluelinelabs/LoganSquare.svg)][logansquare]
 
 ```groovy
-apt "com.bluelinelabs:logansquare-compiler:<latest-logansquare-version>"
+annotationProcessor "com.bluelinelabs:logansquare-compiler:<latest-logansquare-version>"
 compile "com.bluelinelabs:logansquare:<latest-logansquare-version>"
 ```
 
