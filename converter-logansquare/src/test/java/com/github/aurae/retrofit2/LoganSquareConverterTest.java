@@ -9,6 +9,7 @@ import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import retrofit2.Call;
@@ -19,6 +20,8 @@ import retrofit2.http.POST;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -69,6 +72,11 @@ public class LoganSquareConverterTest {
     public final MockWebServer mockWebServer = new MockWebServer();
 
     private Service service;
+
+    @BeforeClass
+    public static void setUpClass() {
+        Logger.getLogger(MockWebServer.class.getName()).setLevel(Level.OFF);
+    }
 
     @Before
     public void setUp() {
