@@ -57,5 +57,6 @@ no guarantees that it will work 100% of the time, though!
   [logansquare]: https://github.com/bluelinelabs/LoganSquare
   [retrofit2]: https://github.com/square/retrofit
   [v1gist]: https://gist.github.com/mannodermaus/8427b93b27483763d9cb
+  [travisci]: https://travis-ci.org/mannodermaus/retrofit-logansquare
   [sonatyperepo]: https://oss.sonatype.org/content/repositories/snapshots
  
