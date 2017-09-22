@@ -20,4 +20,4 @@ deploy:
   script: ./scripts/deploy_release.sh
   on:
     tags: true
-    repo: mannodermaus/android-junit5
+    repo: mannodermaus/retrofit-logansquare
