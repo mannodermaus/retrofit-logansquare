@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Utility class for the {@link com.github.aurae.retrofit2.LoganSquareConverterFactory}. This resides in LoganSquare's
+ * Utility class for the {@link de.mannodermaus.retrofit2.LoganSquareConverterFactory}. This resides in LoganSquare's
  * main package in order to take advantage of the package-visible ConcreteParameterizedType class, which is essential
  * to the support of generic classes in the Retrofit converter.
  */

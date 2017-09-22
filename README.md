@@ -1,44 +1,46 @@
 # retrofit-logansquare
 
-[![Travis Build Status](https://img.shields.io/travis/aurae/retrofit-logansquare.svg)](https://travis-ci.org/aurae/retrofit-logansquare) [![Latest Version](https://img.shields.io/bintray/v/aurae/maven/retrofit2-logansquare.svg)](https://bintray.com/aurae/maven/retrofit2-logansquare)
+[![Travis Build Status](https://travis-ci.org/mannodermaus/retrofit-logansquare.svg?branch=master)][travisci]
 
-A `Converter` implementation using BlueLine Labs' [LoganSquare][logansquare] JSON serialization for Square's [Retrofit][retrofit] REST library.  
-**Please note** that this library is solely intended for usage with **Retrofit 2.0.0 and above**! It won't work with 1.9 or earlier. Please refer [to this section of the README](#retro1) for instructions on how to include LoganSquare serialization on these versions.
+A `Converter` implementation using BlueLine Labs' [LoganSquare][logansquare] JSON serialization for Square's [Retrofit 2][retrofit2] REST library.
 
 ## Download
 
-Get it on `jcenter()`:
-
-`compile "com.github.aurae.retrofit2:converter-logansquare:1.4.1"`
-
-Don't forget to include the dependencies on LoganSquare as well!
-Their latest release at the moment:
-[![Check the repo](https://img.shields.io/github/tag/bluelinelabs/LoganSquare.svg)][logansquare]
-
 ```groovy
-annotationProcessor "com.bluelinelabs:logansquare-compiler:<latest-logansquare-version>"
-compile "com.bluelinelabs:logansquare:<latest-logansquare-version>"
+dependencies {
+    implementation "de.mannodermaus.retrofit2:converter-logansquare:2.0.0"
+    
+    // Don't forget to include the dependencies on LoganSquare as well:
+    annotationProcessor "com.bluelinelabs:logansquare-compiler:<latest-logansquare-version>"
+    implementation "com.bluelinelabs:logansquare:<latest-logansquare-version>"
+}
 ```
+
+The latest version of LoganSquare: [![Check the repo](https://img.shields.io/github/tag/bluelinelabs/LoganSquare.svg)][logansquare]
+
+Snapshots of the development version are available through [Sonatype's `snapshots` repository][sonatyperepo].
 
 ## Usage
 
-Plug in the `LoganSquareConverterFactory` like any other converter upon creating your `Retrofit` instance:
+Plug in the `LoganSquareConverterFactory` like any other converter while building your `Retrofit` instance:
 
-```java
-Retrofit retrofit = new Retrofit.Builder()
+```kotlin
+val retrofit = Retrofit.Builder()
     .baseUrl("https://your.server.com/api/")
     .addConverterFactory(LoganSquareConverterFactory.create())
-    .build();
+    .build()
 ```
 
 <a name="retro1"></a>
-## I'm using Retrofit 1.x, though!
+## Retrofit 1.x
 
-In that case, it might be time to upgrade! If you can't or won't, refer to [this gist][v1gist] for a quick solution (no guarantees that it will work 100% of the time, though).
+This library is solely intended for usage with version **2.0.0** and above of Retrofit. If you're still on an older release,
+consider upgrading if you decide to use this converter. For a quick bootstrap solution, please refer to [this gist][v1gist] -
+no guarantees that it will work 100% of the time, though!
 
 ## License
 
-	Copyright 2016 Marcel Schnelle
+	Copyright 2017 Marcel Schnelle
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -53,6 +55,8 @@ In that case, it might be time to upgrade! If you can't or won't, refer to [this
 	limitations under the License.
 
   [logansquare]: https://github.com/bluelinelabs/LoganSquare
-  [retrofit]: https://github.com/square/retrofit
-  [v1gist]: https://gist.github.com/aurae/8427b93b27483763d9cb
+  [retrofit2]: https://github.com/square/retrofit
+  [v1gist]: https://gist.github.com/mannodermaus/8427b93b27483763d9cb
+  [travisci]: https://travis-ci.org/mannodermaus/retrofit-logansquare
+  [sonatyperepo]: https://oss.sonatype.org/content/repositories/snapshots
  
