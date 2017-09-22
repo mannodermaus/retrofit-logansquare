@@ -94,7 +94,7 @@ project.configure(project) {
             dryRun = false
             pkg {
                 repo = "maven"
-                name = "retrofit2-converter-logansquare"
+                name = "retrofit2-logansquare"
                 userOrg = project.ext.bintrayUser
                 licenses = ["Apache-2.0"]
                 publish = false
