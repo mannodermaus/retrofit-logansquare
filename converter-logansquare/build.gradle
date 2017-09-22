@@ -18,37 +18,14 @@ dependencies {
     testApt "com.bluelinelabs:logansquare-compiler:$LOGANSQUARE_VERSION"
 }
 
+// ------------------------------------------------------------------------------------------------
+// Deployment Setup
+//
+// Releases are pushed to jcenter via Bintray, while snapshots are pushed to Sonatype OSS.
+// This section defines the necessary tasks to push new releases and snapshots using Gradle tasks.
+// ------------------------------------------------------------------------------------------------
+
 version = VERSION_NAME
-
-bintray {
-    user = project.ext.bintrayUser
-    key = project.ext.bintrayApiKey
-    configurations = ["archives"]
-    pkg {
-        repo = "maven"
-        name = "retrofit2-logansquare"
-        userOrg = properties.get("BINTRAY_USER")
-        licenses = ["Apache-2.0"]
-        publish = true
-        publicDownloadNumbers = true
-        vcsUrl = "https://github.com/mannodermaus/retrofit-logansquare"
-        version {
-            name = VERSION_NAME
-            desc = DESCRIPTION
-        }
-    }
-}
-
-publishing {
-    publications {
-        MyPublication(MavenPublication) {
-            from components.java
-            groupId GROUP_ID
-            artifactId ARTIFACT_ID
-            version VERSION_NAME
-        }
-    }
-}
 
 task copyPom(type: Copy) {
     from "build/publications/MyPublication"
@@ -71,4 +48,63 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives sourcesJar
     archives javadocJar
+}
+
+publishing {
+    publications {
+        library(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId GROUP_ID
+            artifactId ARTIFACT_ID
+            version VERSION_NAME
+            pom.withXml {
+                def root = asNode()
+                root.appendNode("description", DESCRIPTION)
+                root.appendNode("name", ARTIFACT_ID)
+                root.appendNode("url", VCS_URL)
+            }
+        }
+    }
+}
+
+project.configure(project) {
+    if (project.version.endsWith("-SNAPSHOT")) {
+        // Configure deployment of snapshot versions to Sonatype OSS
+        project.publishing {
+            repositories {
+                maven {
+                    name "snapshot"
+                    credentials {
+                        username project.ext.sonatypeUser
+                        password project.ext.sonatypePass
+                    }
+                    url "https://oss.sonatype.org/content/repositories/snapshots"
+                }
+            }
+        }
+
+    } else {
+        // Configure deployment of release versions to Bintray
+        project.bintray {
+            user = project.ext.bintrayUser
+            key = project.ext.bintrayKey
+            configurations = ["archives"]
+            dryRun = false
+            pkg {
+                repo = "maven"
+                name = "retrofit2-converter-logansquare"
+                userOrg = project.ext.bintrayUser
+                licenses = ["Apache-2.0"]
+                publish = false
+                publicDownloadNumbers = true
+                vcsUrl = VCS_URL
+                version {
+                    name = VERSION_NAME
+                    desc = DESCRIPTION
+                }
+            }
+        }
+    }
 }
