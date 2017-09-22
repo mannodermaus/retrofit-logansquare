@@ -1,4 +1,4 @@
-package com.github.aurae.retrofit2;
+package de.mannodermaus.retrofit2;
 
 import com.bluelinelabs.logansquare.LoganSquare;
 import okhttp3.MediaType;

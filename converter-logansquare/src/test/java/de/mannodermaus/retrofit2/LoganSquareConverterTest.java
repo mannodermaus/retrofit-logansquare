@@ -1,9 +1,8 @@
-package com.github.aurae.retrofit2;
+package de.mannodermaus.retrofit2;
 
-import com.github.aurae.retrofit2.model.BasicModel;
-import com.github.aurae.retrofit2.model.CustomEnum;
-import com.github.aurae.retrofit2.model.ForeignModel;
-import com.github.aurae.retrofit2.model.GenericModel;
+import de.mannodermaus.retrofit2.model.BasicModel;
+import de.mannodermaus.retrofit2.model.CustomEnum;
+import de.mannodermaus.retrofit2.model.GenericModel;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -50,22 +49,22 @@ public class LoganSquareConverterTest {
         Call<GenericModel<Integer>> callGenerics(@Body GenericModel<Integer> body);
 
         @POST("/")
-        Call<BasicModel> callObjectRequestNotSupported(@Body ForeignModel body);
+        Call<BasicModel> callObjectRequestNotSupported(@Body de.mannodermaus.retrofit2.model.ForeignModel body);
 
         @POST("/")
-        Call<ForeignModel> callObjectResponseNotSupported(@Body BasicModel body);
+        Call<de.mannodermaus.retrofit2.model.ForeignModel> callObjectResponseNotSupported(@Body BasicModel body);
 
         @POST("/")
-        Call<BasicModel> callListRequestNotSupported(@Body List<ForeignModel> body);
+        Call<BasicModel> callListRequestNotSupported(@Body List<de.mannodermaus.retrofit2.model.ForeignModel> body);
 
         @POST("/")
-        Call<List<ForeignModel>> callListResponseNotSupported(@Body BasicModel body);
+        Call<List<de.mannodermaus.retrofit2.model.ForeignModel>> callListResponseNotSupported(@Body BasicModel body);
 
         @POST("/")
-        Call<BasicModel> callMapRequestNotSupported(@Body Map<String, ForeignModel> body);
+        Call<BasicModel> callMapRequestNotSupported(@Body Map<String, de.mannodermaus.retrofit2.model.ForeignModel> body);
 
         @POST("/")
-        Call<Map<String, ForeignModel>> callMapResponseNotSupported(@Body BasicModel body);
+        Call<Map<String, de.mannodermaus.retrofit2.model.ForeignModel>> callMapResponseNotSupported(@Body BasicModel body);
     }
 
     @Rule
@@ -89,7 +88,7 @@ public class LoganSquareConverterTest {
 
     @Test
     public void testDoesntSupportObjectRequest() throws IOException, InterruptedException {
-        ForeignModel requestBody = new ForeignModel();
+        de.mannodermaus.retrofit2.model.ForeignModel requestBody = new de.mannodermaus.retrofit2.model.ForeignModel();
 
         try {
             // Call the API and execute it
@@ -113,8 +112,8 @@ public class LoganSquareConverterTest {
 
     @Test
     public void testDoesntSupportListRequest() throws IOException, InterruptedException {
-        List<ForeignModel> requestBody = new ArrayList<>();
-        requestBody.add(new ForeignModel());
+        List<de.mannodermaus.retrofit2.model.ForeignModel> requestBody = new ArrayList<>();
+        requestBody.add(new de.mannodermaus.retrofit2.model.ForeignModel());
 
         try {
             // Call the API and execute it
@@ -138,8 +137,8 @@ public class LoganSquareConverterTest {
 
     @Test
     public void testDoesntSupportMapRequest() throws IOException, InterruptedException {
-        Map<String, ForeignModel> requestBody = new HashMap<>();
-        requestBody.put("obj", new ForeignModel());
+        Map<String, de.mannodermaus.retrofit2.model.ForeignModel> requestBody = new HashMap<>();
+        requestBody.put("obj", new de.mannodermaus.retrofit2.model.ForeignModel());
 
         try {
             // Call the API and execute it

@@ -1,4 +1,4 @@
-package com.github.aurae.retrofit2;
+package de.mannodermaus.retrofit2;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;

@@ -1,4 +1,4 @@
-package com.github.aurae.retrofit2.model;
+package de.mannodermaus.retrofit2.model;
 
 public enum CustomEnum {
     VAL_1(1),
