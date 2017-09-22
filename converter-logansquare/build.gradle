@@ -97,7 +97,7 @@ project.configure(project) {
                 name = "retrofit2-logansquare"
                 userOrg = project.ext.bintrayUser
                 licenses = ["Apache-2.0"]
-                publish = false
+                publish = true
                 publicDownloadNumbers = true
                 vcsUrl = VCS_URL
                 version {
