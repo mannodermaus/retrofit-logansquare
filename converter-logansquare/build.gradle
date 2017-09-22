@@ -28,7 +28,7 @@ dependencies {
 version = VERSION_NAME
 
 task copyPom(type: Copy) {
-    from "build/publications/MyPublication"
+    from "build/publications/library"
     into "build/poms"
     include "pom-default.xml"
 }
