@@ -1,6 +1,6 @@
 # retrofit-logansquare
 
-[![Travis Build Status](https://img.shields.io/travis/mannodermaus/retrofit-logansquare.svg)](https://travis-ci.org/mannodermaus/retrofit-logansquare) [![Latest Version](https://img.shields.io/bintray/v/mannodermaus/maven/retrofit2-logansquare.svg)](https://bintray.com/mannodermaus/maven/retrofit2-logansquare)
+[![Travis Build Status](https://img.shields.io/travis/mannodermaus/retrofit-logansquare.svg)](https://travis-ci.org/mannodermaus/retrofit-logansquare)
 
 A `Converter` implementation using BlueLine Labs' [LoganSquare][logansquare] JSON serialization for Square's [Retrofit][retrofit] REST library.  
 **Please note** that this library is solely intended for usage with **Retrofit 2.0.0 and above**! It won't work with 1.9 or earlier. Please refer [to this section of the README](#retro1) for instructions on how to include LoganSquare serialization on these versions.
