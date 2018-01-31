@@ -34,7 +34,7 @@ public final class LoganSquareConverterFactory extends Converter.Factory {
         if (isSupported(type)) {
             return new LoganSquareResponseBodyConverter(type);
         } else {
-            return null;
+            return super.responseBodyConverter(type, annotations, retrofit);
         }
     }
 
@@ -43,7 +43,7 @@ public final class LoganSquareConverterFactory extends Converter.Factory {
         if (isSupported(type)) {
             return new LoganSquareRequestBodyConverter(type);
         } else {
-            return null;
+            return super.requestBodyConverter(type, parameterAnnotations, methodAnnotations, retrofit);
         }
     }
 }
