@@ -11,7 +11,7 @@ Get it from Maven Central. Don't forget to include LoganSquare's dependencies as
 
 ```groovy
 dependencies {
-	implementation("de.mannodermaus.retrofit2:converter-logansquare:1.4.1")
+    implementation("de.mannodermaus.retrofit2:converter-logansquare:1.4.1")
 }
 ```
 
